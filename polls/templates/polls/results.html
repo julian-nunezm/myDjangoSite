@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<div class="container">
+    <h1>{{ question }}.</h1>
+    <ul class="list-group">
+    {% for choice in question.choice_set.all %}
+        <li class="list-group-item option-transparent option-font">
+            {{ choice.choice_text }}
+            <span class="badge badge-light">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'polls:detail' question.id %}">Vote again?</a> or come back to <a href="{% url 'polls:index' %}">all questions</a>?
+</div>

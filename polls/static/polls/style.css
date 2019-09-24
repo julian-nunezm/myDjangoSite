@@ -1,0 +1,19 @@
+body {
+    background: url("images/django-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.option-font {
+    color: black;
+    font-size: 20px;
+}
+
+.option-transparent {
+    background-color: transparent;
+}
+
+.option-transparent:hover {
+    background-color: #ababab69;
+    transform: translateX(5px);
+}

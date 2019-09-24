@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+<div class="container">
+    <h1>{{ question }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <div class="list-group">
+    {% for choice in question.choice_set.all %}
+        <div class="list-group-item option-transparent">
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}" class="option-font">{{ choice.choice_text }}</label><br>
+        </div>
+    {% endfor %}
+    </div>
+    <input class="btn btn-primary" type="submit" value="Vote">
+    </form>
+    <p>Now, you can see the <a href="{% url 'polls:results' question.id %}">results</a> for this poll.</p>
+    <p>To come back to <a href="{% url 'polls:index' %}">all questions</a>.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
